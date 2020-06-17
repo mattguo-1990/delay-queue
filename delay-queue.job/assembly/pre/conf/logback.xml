@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!--日志配置-->
+	<property name="PROJECT_NAME" value="delay_queue_job_java"/>
+	<property name="LOG_BASE" value="/home/product/logs"/>
+	<property name="LOG_BACK_DIR" value="${LOG_BASE}/${PROJECT_NAME}_logs"/>
+
+	<!-- logback 工程的日志配置-->
+	<appender name="INFO_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BACK_DIR}/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily -->
+			<fileNamePattern>${LOG_BACK_DIR}/info_%d{yyyyMMddHH}.log</fileNamePattern>
+			<maxHistory>48</maxHistory>
+			<!-- 保存最大文件数 2天的日志-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%X{threadId}|%X{traceId}-%X{rpcId}|%level|%C|%M|%L|uid=%X{uid},deviceId=%X{deviceId},sessionId=%X{sessionId},requestId=%X{requestId},tradeId=%X{tradeId},clientIp=%X{clientIp}|%.-512msg|%X{callChain}%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"><!-- 只打印错误日志 -->
+			<level>INFO</level>
+		</filter>
+	</appender>
+
+	<appender name="ERROR_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BACK_DIR}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily -->
+			<fileNamePattern>${LOG_BACK_DIR}/error_%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<!-- 保存最大文件数-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%X{threadId}|%X{traceId}-%X{rpcId}|%level|%C|%M|%L|uid=%X{uid},deviceId=%X{deviceId},sessionId=%X{sessionId},requestId=%X{requestId},tradeId=%X{tradeId},clientIp=%X{clientIp}|%.-512msg|%X{callChain}%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"><!-- 只打印错误日志 -->
+			<level>WARN</level>
+		</filter>
+	</appender>
+
+	<appender name="DEBUG_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_BACK_DIR}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily -->
+			<fileNamePattern>${LOG_BACK_DIR}/debug_%d{yyyyMMddHH}.log</fileNamePattern>
+			<maxHistory>48</maxHistory>
+			<!-- 保存最大文件数-->
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%X{threadId}|%X{traceId}-%X{rpcId}|%level|%C|%M|%L|uid=%X{uid},deviceId=%X{deviceId},sessionId=%X{sessionId},requestId=%X{requestId},tradeId=%X{tradeId},clientIp=%X{clientIp}|%.-512msg|%X{callChain}%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"><!-- 只打印错误日志 -->
+			<level>TRACE</level>
+		</filter>
+	</appender>
+	<!-- logback 工程的日志配置 END-->
+
+
+	<!-- logback 工程的日志配置 END-->
+
+
+
+
+	<!-- 开发环境使用 打印在控制台-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<param name="Pattern"
+				   value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%X{threadId}|%X{traceId}-%X{rpcId}|%level|%C|%M|%L|uid=%X{uid},deviceId=%X{deviceId},sessionId=%X{sessionId},requestId=%X{requestId},tradeId=%X{tradeId},clientIp=%X{clientIp}|%.-512msg|%X{callChain}%n"/>
+		</layout>
+	</appender>
+
+	<logger name="org.springframework" level="WARN" />
+	<logger name="java.sql.Connection" level="INFO" />
+	<logger name="java.sql.ResultSet" level="INFO" />
+	<logger name="org.apache.zookeeper.ClientCnxn" level="WARN"/>
+	<logger name="org.mybatis.spring.SqlSessionUtils" level="WARN" />
+	<!--开发环境为DEBUG等级-->
+	<root level="INFO">
+		<appender-ref ref="INFO_ROLLING"/>
+		<appender-ref ref="WARN_ROLLING"/>
+		<appender-ref ref="ERROR_ROLLING" />
+	</root>
+</configuration>

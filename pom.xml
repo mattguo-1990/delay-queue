@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.fenqile</groupId>
+        <artifactId>pom.base</artifactId>
+        <version>0.0.19</version>
+    </parent>
+    <artifactId>delay_queue_java</artifactId>
+    <groupId>com.fenqile</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>delay_queue_java</name>
+
+    <modules>
+        <module>delay-queue.service</module>
+        <module>delay-queue.dao</module>
+        <module>delay-queue.consumer</module>
+        <module>delay-queue.job</module>
+        <module>delay-queue.redis</module>
+        <module>delay-queue.retry</module>
+    </modules>
+    <properties>
+        <java.version>1.7</java.version>
+        <fenqile.mq.version>1.2.8-SNAPSHOT</fenqile.mq.version>
+        <maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+        <fenqile.common.version>1.6.2</fenqile.common.version>
+        <openssh.version>1.0-SNAPSHOT</openssh.version>
+        <dubbo.version>2.10.1</dubbo.version>
+        <message.interface-version>0.0.2-SNAPSHOT</message.interface-version>
+        <lombok-version>1.16.10</lombok-version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>pre</id>
+            <properties>
+                <env>pre</env>
+            </properties>
+        </profile>
+
+        <!-- ?????? -->
+        <profile>
+            <id>gray</id>
+            <properties>
+                <env>gray</env>
+            </properties>
+        </profile>
+
+        <!-- ??? -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.util</artifactId>
+                <version>${fenqile.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.dao</artifactId>
+                <version>${fenqile.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.protocol</artifactId>
+                <version>${fenqile.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.mq</artifactId>
+                <version>${fenqile.mq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile</groupId>
+                <artifactId>message.interface</artifactId>
+                <version>${message.interface-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>open-ssh</artifactId>
+                <version>${openssh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.redis</artifactId>
+                <version>${fenqile.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fenqile.common</groupId>
+                <artifactId>fenqile.protocol</artifactId>
+                <version>1.2.2-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <!-- ???apache??pval??? ?????? -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-validation_1.0_spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.bval</groupId>
+            <artifactId>org.apache.bval.bundle</artifactId>
+        </dependency>
+        <!-- ???apache??pval??? ?????? END -->
+
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>uk.org.lidalia</groupId>
+            <artifactId>sysout-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.curator</groupId>
+                    <artifactId>curator-framework</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.curator</groupId>
+                    <artifactId>curator-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpcore</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>

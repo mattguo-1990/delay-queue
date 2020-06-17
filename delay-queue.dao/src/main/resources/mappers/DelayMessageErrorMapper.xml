@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fenqile.delayqueue.dao.db.dao.DelayMessageErrorDao" >
+  <resultMap id="BaseResultMap" type="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    <id column="Findex" property="index" jdbcType="INTEGER" />
+    <result column="Fmsg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="Fmessage" property="message" jdbcType="VARCHAR" />
+    <result column="Fexcute_times" property="excuteTimes" jdbcType="INTEGER" />
+    <result column="Fexcute_state" property="excuteState" jdbcType="VARCHAR" />
+    <result column="Ferror_msg" property="errorMsg" jdbcType="VARCHAR" />
+    <result column="Ferror_code" property="errorCode" jdbcType="VARCHAR" />
+    <result column="Flast_excute_time" property="lastExcuteTime" jdbcType="TIMESTAMP" />
+    <result column="Fmanual_excute_time" property="manualExcuteTime" jdbcType="TIMESTAMP" />
+    <result column="Fuser_no" property="userNo" jdbcType="VARCHAR" />
+    <result column="Fmanual_excute_memo" property="manualExcuteMemo" jdbcType="VARCHAR" />
+    <result column="Fversion" property="version" jdbcType="INTEGER" />
+    <result column="Fcreate_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="Fmodify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="Ftopic" property="topic" jdbcType="VARCHAR" />
+    <result column="Fbiz_type" property="bizType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Findex, Fmsg_id, Fmessage, Fexcute_times, Fexcute_state, Ferror_msg, Ferror_code, 
+    Flast_excute_time, Fmanual_excute_time, Fuser_no, Fmanual_excute_memo, Fversion, 
+    Fcreate_time, Fmodify_time, Ftopic, Fbiz_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_delay_message_error
+    where Findex = #{index,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_delay_message_error
+    where Findex = #{index,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    insert into t_delay_message_error (Findex, Fmsg_id, Fmessage, 
+      Fexcute_times, Fexcute_state, Ferror_msg, 
+      Ferror_code, Flast_excute_time, Fmanual_excute_time, 
+      Fuser_no, Fmanual_excute_memo, Fversion, 
+      Fcreate_time, Fmodify_time, Ftopic, 
+      Fbiz_type)
+    values (#{index,jdbcType=INTEGER}, #{msgId,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{excuteTimes,jdbcType=INTEGER}, #{excuteState,jdbcType=VARCHAR}, #{errorMsg,jdbcType=VARCHAR}, 
+      #{errorCode,jdbcType=VARCHAR}, #{lastExcuteTime,jdbcType=TIMESTAMP}, #{manualExcuteTime,jdbcType=TIMESTAMP}, 
+      #{userNo,jdbcType=VARCHAR}, #{manualExcuteMemo,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{topic,jdbcType=VARCHAR}, 
+      #{bizType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    insert into t_delay_message_error
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="index != null" >
+        Findex,
+      </if>
+      <if test="msgId != null" >
+        Fmsg_id,
+      </if>
+      <if test="message != null" >
+        Fmessage,
+      </if>
+      <if test="excuteTimes != null" >
+        Fexcute_times,
+      </if>
+      <if test="excuteState != null" >
+        Fexcute_state,
+      </if>
+      <if test="errorMsg != null" >
+        Ferror_msg,
+      </if>
+      <if test="errorCode != null" >
+        Ferror_code,
+      </if>
+      <if test="lastExcuteTime != null" >
+        Flast_excute_time,
+      </if>
+      <if test="manualExcuteTime != null" >
+        Fmanual_excute_time,
+      </if>
+      <if test="userNo != null" >
+        Fuser_no,
+      </if>
+      <if test="manualExcuteMemo != null" >
+        Fmanual_excute_memo,
+      </if>
+      <if test="version != null" >
+        Fversion,
+      </if>
+      <if test="createTime != null" >
+        Fcreate_time,
+      </if>
+      <if test="modifyTime != null" >
+        Fmodify_time,
+      </if>
+      <if test="topic != null" >
+        Ftopic,
+      </if>
+      <if test="bizType != null" >
+        Fbiz_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="index != null" >
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="msgId != null" >
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="excuteTimes != null" >
+        #{excuteTimes,jdbcType=INTEGER},
+      </if>
+      <if test="excuteState != null" >
+        #{excuteState,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCode != null" >
+        #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExcuteTime != null" >
+        #{lastExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manualExcuteTime != null" >
+        #{manualExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="manualExcuteMemo != null" >
+        #{manualExcuteMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topic != null" >
+        #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    update t_delay_message_error
+    <set >
+      <if test="msgId != null" >
+        Fmsg_id = #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        Fmessage = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="excuteTimes != null" >
+        Fexcute_times = #{excuteTimes,jdbcType=INTEGER},
+      </if>
+      <if test="excuteState != null" >
+        Fexcute_state = #{excuteState,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        Ferror_msg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCode != null" >
+        Ferror_code = #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExcuteTime != null" >
+        Flast_excute_time = #{lastExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manualExcuteTime != null" >
+        Fmanual_excute_time = #{manualExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNo != null" >
+        Fuser_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="manualExcuteMemo != null" >
+        Fmanual_excute_memo = #{manualExcuteMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        Fversion = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        Fcreate_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        Fmodify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topic != null" >
+        Ftopic = #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        Fbiz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Findex = #{index,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    update t_delay_message_error
+    set Fmsg_id = #{msgId,jdbcType=VARCHAR},
+      Fmessage = #{message,jdbcType=VARCHAR},
+      Fexcute_times = #{excuteTimes,jdbcType=INTEGER},
+      Fexcute_state = #{excuteState,jdbcType=VARCHAR},
+      Ferror_msg = #{errorMsg,jdbcType=VARCHAR},
+      Ferror_code = #{errorCode,jdbcType=VARCHAR},
+      Flast_excute_time = #{lastExcuteTime,jdbcType=TIMESTAMP},
+      Fmanual_excute_time = #{manualExcuteTime,jdbcType=TIMESTAMP},
+      Fuser_no = #{userNo,jdbcType=VARCHAR},
+      Fmanual_excute_memo = #{manualExcuteMemo,jdbcType=VARCHAR},
+      Fversion = #{version,jdbcType=INTEGER},
+      Fcreate_time = #{createTime,jdbcType=TIMESTAMP},
+      Fmodify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      Ftopic = #{topic,jdbcType=VARCHAR},
+      Fbiz_type = #{bizType,jdbcType=VARCHAR}
+    where Findex = #{index,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByMsgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_delay_message_error
+    where Fmsg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateByMsgId" parameterType="com.fenqile.delayqueue.dao.db.domain.DelayMessageError" >
+    update t_delay_message_error
+    <set >
+      <if test="message != null" >
+        Fmessage = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="excuteTimes != null" >
+        Fexcute_times = #{excuteTimes,jdbcType=INTEGER},
+      </if>
+      <if test="excuteState != null" >
+        Fexcute_state = #{excuteState,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        Ferror_msg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCode != null" >
+        Ferror_code = #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastExcuteTime != null" >
+        Flast_excute_time = #{lastExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manualExcuteTime != null" >
+        Fmanual_excute_time = #{manualExcuteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNo != null" >
+        Fuser_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="manualExcuteMemo != null" >
+        Fmanual_excute_memo = #{manualExcuteMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        Fversion = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        Fcreate_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        Fmodify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="topic != null" >
+        Ftopic = #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        Fbiz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Fmsg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+</mapper>
